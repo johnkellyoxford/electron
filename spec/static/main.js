@@ -2,7 +2,7 @@
 process.throwDeprecation = false
 
 const electron = require('electron')
-const { app, BrowserWindow, crashReporter, dialog, ipcMain, protocol, webContents } = electron
+const { app, BrowserWindow, dialog, ipcMain, protocol, webContents } = electron
 
 const { Coverage } = require('electabul')
 
@@ -47,11 +47,6 @@ console
 ipcMain.on('message', function (event, ...args) {
   event.sender.send('message', ...args)
 })
-
-// Set productName so getUploadedReports() uses the right directory in specs
-if (process.platform !== 'darwin') {
-  crashReporter.productName = 'Zombies'
-}
 
 // Write output to file if OUTPUT_TO_FILE is defined.
 const outputToFile = process.env.OUTPUT_TO_FILE
