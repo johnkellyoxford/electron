@@ -1,8 +1,16 @@
+From f013c224def258bab0f14282f3e9c5dd68c5ce29 Mon Sep 17 00:00:00 2001
+From: deepak1556 <hop2deep@gmail.com>
+Date: Thu, 20 Sep 2018 17:50:06 -0700
+Subject: content_browser_manifest.patch
+
+Allow content_browser service to access GeolocationControl
+interface from device service.
+
 diff --git a/content/public/app/mojo/content_browser_manifest.json b/content/public/app/mojo/content_browser_manifest.json
-index a515b68616a8..dc0431fd17e6 100644
+index 96f8e822a918..9d6902dc2b68 100644
 --- a/content/public/app/mojo/content_browser_manifest.json
 +++ b/content/public/app/mojo/content_browser_manifest.json
-@@ -90,6 +90,7 @@
+@@ -97,6 +97,7 @@
            "device:battery_monitor",
            "device:generic_sensor",
            "device:geolocation",
