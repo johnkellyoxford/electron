@@ -3,6 +3,11 @@ jobs:
   displayName: Build Electron via GN
   timeoutInMinutes: 120
   steps:
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: src/electron'
+    inputs:
+      TargetFolder: src/electron
+
   - bash: |
       export PATH="$PATH:/Users/electron/depot_tools"
       echo "##vso[task.setvariable variable=PATH]$PATH"
