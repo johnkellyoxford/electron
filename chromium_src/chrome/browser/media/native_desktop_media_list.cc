@@ -49,7 +49,7 @@ gfx::ImageSkia ScaleDesktopFrame(std::unique_ptr<webrtc::DesktopFrame> frame,
   SkBitmap result;
   result.allocN32Pixels(scaled_rect.width(), scaled_rect.height(), true);
 
-  uint8* pixels_data = reinterpret_cast<uint8*>(result.getPixels());
+  uint8_t* pixels_data = reinterpret_cast<uint8_t*>(result.getPixels());
   libyuv::ARGBScale(frame->data(), frame->stride(), frame->size().width(),
                     frame->size().height(), pixels_data, result.rowBytes(),
                     scaled_rect.width(), scaled_rect.height(),
@@ -89,7 +89,7 @@ class NativeDesktopMediaList::Worker
                content::DesktopMediaID::Id view_dialog_id);
 
  private:
-  typedef std::map<DesktopMediaID, uint32> ImageHashesMap;
+  typedef std::map<DesktopMediaID, uint32_t> ImageHashesMap;
 
   // webrtc::DesktopCapturer::Callback interface.
   void OnCaptureResult(webrtc::DesktopCapturer::Result result,
