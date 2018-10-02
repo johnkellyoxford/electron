@@ -41,7 +41,8 @@ class AtomBrowserContext : public brightray::BrowserContext {
   // content::BrowserContext:
   content::DownloadManagerDelegate* GetDownloadManagerDelegate() override;
   content::BrowserPluginGuestManager* GetGuestManager() override;
-  content::PermissionManager* GetPermissionManager() override;
+  content::PermissionControllerDelegate* GetPermissionControllerDelegate()
+      override;
   storage::SpecialStoragePolicy* GetSpecialStoragePolicy() override;
 
   // brightray::BrowserContext:
