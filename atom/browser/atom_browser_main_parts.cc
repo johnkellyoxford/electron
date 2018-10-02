@@ -65,8 +65,7 @@ AtomBrowserMainParts::AtomBrowserMainParts()
     : fake_browser_process_(new BrowserProcess),
       browser_(new Browser),
       node_bindings_(NodeBindings::Create(NodeBindings::BROWSER)),
-      atom_bindings_(new AtomBindings(uv_default_loop())),
-      gc_timer_(true, true) {
+      atom_bindings_(new AtomBindings(uv_default_loop())) {
   DCHECK(!self_) << "Cannot have two AtomBrowserMainParts";
   self_ = this;
   // Register extension scheme as web safe scheme.
