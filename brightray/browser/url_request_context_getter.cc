@@ -306,12 +306,7 @@ net::URLRequestContext* URLRequestContextGetter::GetURLRequestContext() {
     schemes.push_back(std::string("digest"));
     schemes.push_back(std::string("ntlm"));
     schemes.push_back(std::string("negotiate"));
-#if defined(OS_POSIX)
-    http_auth_preferences_.reset(
-        new net::HttpAuthPreferences(schemes, std::string()));
-#else
-    http_auth_preferences_.reset(new net::HttpAuthPreferences(schemes));
-#endif
+    http_auth_preferences_.reset(new net::HttpAuthPreferences());
 
     // --auth-server-whitelist
     if (command_line.HasSwitch(switches::kAuthServerWhitelist)) {
@@ -327,7 +322,7 @@ net::URLRequestContext* URLRequestContextGetter::GetURLRequestContext() {
     }
 
     auto auth_handler_factory = net::HttpAuthHandlerRegistryFactory::Create(
-        http_auth_preferences_.get(), host_resolver.get());
+        host_resolver.get(), http_auth_preferences_.get(), schemes);
 
     std::unique_ptr<net::TransportSecurityState> transport_security_state =
         base::WrapUnique(new net::TransportSecurityState);
