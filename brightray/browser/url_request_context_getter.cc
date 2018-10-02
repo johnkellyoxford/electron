@@ -330,7 +330,8 @@ net::URLRequestContext* URLRequestContextGetter::GetURLRequestContext() {
     storage_->set_transport_security_state(std::move(transport_security_state));
     storage_->set_cert_verifier(
         delegate_->CreateCertVerifier(ct_delegate_.get()));
-    storage_->set_ssl_config_service(new net::SSLConfigServiceDefaults());
+    storage_->set_ssl_config_service(
+        std::make_unique<net::SSLConfigServiceDefaults>());
     storage_->set_http_auth_handler_factory(std::move(auth_handler_factory));
     std::unique_ptr<net::HttpServerProperties> server_properties(
         new net::HttpServerPropertiesImpl);
