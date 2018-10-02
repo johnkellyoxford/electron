@@ -106,7 +106,7 @@ class Session : public mate::TrackableObject<Session>,
   v8::Global<v8::Value> web_request_;
 
   // The X-DevTools-Emulate-Network-Conditions-Client-Id.
-  std::string devtools_network_emulation_client_id_;
+  base::UnguessableToken devtools_network_emulation_client_id_;
 
   scoped_refptr<AtomBrowserContext> browser_context_;
 

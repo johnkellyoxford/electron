@@ -448,7 +448,7 @@ void DownloadIdCallback(content::DownloadManager* download_manager,
 
 void SetDevToolsNetworkEmulationClientIdInIO(
     brightray::URLRequestContextGetter* url_request_context_getter,
-    const std::string& client_id) {
+    const base::UnguessableToken& client_id) {
   if (!url_request_context_getter)
     return;
   net::URLRequestContext* context =
@@ -478,7 +478,7 @@ void DestroyGlobalHandle(v8::Isolate* isolate,
 }  // namespace
 
 Session::Session(v8::Isolate* isolate, AtomBrowserContext* browser_context)
-    : devtools_network_emulation_client_id_(base::GenerateGUID()),
+    : devtools_network_emulation_client_id_(base::UnguessableToken::Create()),
       browser_context_(browser_context) {
   // Observe DownloadManager to get download notifications.
   content::BrowserContext::GetDownloadManager(browser_context)
@@ -602,7 +602,7 @@ void Session::DisableNetworkEmulation() {
       BrowserThread::IO, FROM_HERE,
       base::BindOnce(&SetDevToolsNetworkEmulationClientIdInIO,
                      base::RetainedRef(browser_context_->GetRequestContext()),
-                     std::string()));
+                     base::UnguessableToken()));
 }
 
 void Session::SetCertVerifyProc(v8::Local<v8::Value> val,
