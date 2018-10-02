@@ -36,7 +36,7 @@ namespace {
 class NoCacheBackend : public net::HttpCache::BackendFactory {
   int CreateBackend(net::NetLog* net_log,
                     std::unique_ptr<disk_cache::Backend>* backend,
-                    const net::CompletionCallback& callback) override {
+                    net::CompletionOnceCallback callback) override {
     return net::ERR_FAILED;
   }
 };
